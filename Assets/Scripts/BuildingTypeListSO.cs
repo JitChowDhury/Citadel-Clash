@@ -4,5 +4,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/BuildingTypeListSO")]
 public class BuildingTypeListSO : ScriptableObject
 {
-public List<BuildingTypeSO> buildings;
+public List<BuildingTypeSO> List;
 }

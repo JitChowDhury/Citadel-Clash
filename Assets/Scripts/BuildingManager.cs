@@ -4,15 +4,15 @@ public class BuildingManager : MonoBehaviour
 {
  
     private Camera mainCamera;
-    private BuildingTypeListSO buildingTypeList;
+    private BuildingTypeListSO buildingTypeList;//list aof all building type SO
     private BuildingTypeSO buildingType;
 
 
     private void Start()
     {
         mainCamera = Camera.main;
-        buildingTypeList=Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
-        buildingType = buildingTypeList.buildings[0];
+        buildingTypeList=Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);//loads from resource folder
+        buildingType = buildingTypeList.List[0];
     }
 
     private void Update()
@@ -24,11 +24,11 @@ public class BuildingManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            buildingType = buildingTypeList.buildings[0];
+            buildingType = buildingTypeList.List[0];
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            buildingType = buildingTypeList.buildings[1];
+            buildingType = buildingTypeList.List[1];
         }
     }
 
