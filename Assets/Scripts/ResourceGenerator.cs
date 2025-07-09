@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//attached to the resource generate buildings
 public class ResourceGenerator : MonoBehaviour
 {
     private BuildingTypeSO buildingType;
