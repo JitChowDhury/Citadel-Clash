@@ -27,12 +27,7 @@ public class ResourceManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            AddResource(resourceTypeList.List[0], 2);
-            TestLogResourceAmountDictionary();
 
-        }
     }
 
     private void TestLogResourceAmountDictionary()
