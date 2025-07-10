@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,11 +51,17 @@ public class BuildingTypeSelectUI : MonoBehaviour
 
 
     }
+    void Start()
+    {
+        BuildingManager.Instance.OnActiveBuildingTypeChange += BuildingManager_OnActiveBuildingTypeChange;
+        UpdateActiveBuildingType();
+    }
 
-    void Update()
+    private void BuildingManager_OnActiveBuildingTypeChange(object sender, BuildingManager.OnActiveBuildingTypeChangeEventArgs e)
     {
         UpdateActiveBuildingType();
     }
+
     private void UpdateActiveBuildingType()
     {
         arrowButton.Find("selected").gameObject.SetActive(false);
