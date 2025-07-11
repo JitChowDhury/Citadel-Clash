@@ -36,7 +36,7 @@ public class CameraHandler : MonoBehaviour
         orthographicSize = Mathf.Lerp(orthographicSize, targetOrthographicSize, Time.deltaTime * zoomSpeed);
 
         virtualCamera.Lens.OrthographicSize = orthographicSize;
-        Debug.Log(orthographicSize);
+
     }
 
     private void HandleMovement()
