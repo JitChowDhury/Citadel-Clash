@@ -32,9 +32,10 @@ public class BuildingManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (activeBuildingType != null)
+            if (activeBuildingType != null && CanSpawnBuilding(activeBuildingType, UtilsClass.GetMousePosition()))
                 Instantiate(activeBuildingType.buildingPrefab, UtilsClass.GetMousePosition(), Quaternion.identity);
         }
+
 
     }
 
@@ -50,5 +51,46 @@ public class BuildingManager : MonoBehaviour
     public BuildingTypeSO GetActiveBuildingType()
     {
         return activeBuildingType;
+    }
+
+    private bool CanSpawnBuilding(BuildingTypeSO buildingType, Vector3 position)
+    {
+        BoxCollider2D boxCollider2D = buildingType.buildingPrefab.GetComponent<BoxCollider2D>();
+        Collider2D[] collider2DArray = Physics2D.OverlapBoxAll(position + (Vector3)boxCollider2D.offset, boxCollider2D.size, 0);
+
+        bool isAreaClear = collider2DArray.Length == 0;//first we check if actual area is clear or not
+        if (!isAreaClear) return false;
+
+        collider2DArray = Physics2D.OverlapCircleAll(position, buildingType.minConstructionRadius);//getting colliders inside the min construction radius
+
+        foreach (Collider2D collider in collider2DArray)
+        {
+            //colliders inside the construction radiius
+            BuildingTypeHolder buildingTypeHolder = collider.GetComponent<BuildingTypeHolder>();
+            if (buildingTypeHolder != null)
+            {
+                //has a building of same type withing the minconstruction radius
+                if (buildingTypeHolder.buildingType == buildingType) return false;
+            }
+
+        }
+        //not placed too far from anyother build
+        float maxConstructionRadius = 25f;
+        collider2DArray = Physics2D.OverlapCircleAll(position, maxConstructionRadius);//getting colliders inside the min construction radius
+
+        foreach (Collider2D collider in collider2DArray)
+        {
+            //colliders inside the construction radiius
+            BuildingTypeHolder buildingTypeHolder = collider.GetComponent<BuildingTypeHolder>();
+            if (buildingTypeHolder != null)
+            {
+                //its a building 
+                return true;
+
+            }
+
+        }
+
+        return false;
     }
 }

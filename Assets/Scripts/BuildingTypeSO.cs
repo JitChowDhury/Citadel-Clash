@@ -8,4 +8,5 @@ public class BuildingTypeSO : ScriptableObject
     public Transform buildingPrefab;
     public ResourceGeneratorData resourceGeneratorData;
     public Sprite sprite;
+    public float minConstructionRadius;
 }
