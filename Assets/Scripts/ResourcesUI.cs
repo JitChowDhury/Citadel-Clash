@@ -12,7 +12,7 @@ public class ResourcesUI : MonoBehaviour
     private Dictionary<ResourceTypeSO, Transform> resourceTypeTransformDictionary;
     private void Awake()
     {
-        resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
+        resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);//load from resource folder
         resourceTypeTransformDictionary = new Dictionary<ResourceTypeSO, Transform>();
         Transform resourceTemplate = transform.Find("ResourceTemplate");
 

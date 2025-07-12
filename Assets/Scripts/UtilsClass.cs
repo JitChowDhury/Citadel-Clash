@@ -6,7 +6,7 @@ public static class UtilsClass
     public static Vector3 GetMousePosition()
     {
         if (mainCamera == null) mainCamera = Camera.main;
-        Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);//transform to worldpoint insted of screenPos
         mousePosition.z = 0f;
         return mousePosition;
     }

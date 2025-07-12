@@ -35,7 +35,7 @@ public class ResourceManager : MonoBehaviour
     public void AddResource(ResourceTypeSO resourceType, int amount)
     {
         resourceAmountDictionary[resourceType] += amount;
-        OnResourceAmountChange?.Invoke(this, EventArgs.Empty);
+        OnResourceAmountChange?.Invoke(this, EventArgs.Empty);//invokes to change UI
 
 
     }

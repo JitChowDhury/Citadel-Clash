@@ -11,7 +11,7 @@ public class BuildingManager : MonoBehaviour
 
     public class OnActiveBuildingTypeChangeEventArgs : EventArgs
     {
-        public BuildingTypeSO activeBuildingType;
+        public BuildingTypeSO activeBuildingType;//passing the building type via events
     }
     private Camera mainCamera;
     private BuildingTypeListSO buildingTypeList;//list aof all building type SO
@@ -30,12 +30,11 @@ public class BuildingManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())//checks if the pointer is on a UI
         {
             if (activeBuildingType != null && CanSpawnBuilding(activeBuildingType, UtilsClass.GetMousePosition()))
                 Instantiate(activeBuildingType.buildingPrefab, UtilsClass.GetMousePosition(), Quaternion.identity);
         }
-
 
     }
 
@@ -56,11 +55,13 @@ public class BuildingManager : MonoBehaviour
     private bool CanSpawnBuilding(BuildingTypeSO buildingType, Vector3 position)
     {
         BoxCollider2D boxCollider2D = buildingType.buildingPrefab.GetComponent<BoxCollider2D>();
-        Collider2D[] collider2DArray = Physics2D.OverlapBoxAll(position + (Vector3)boxCollider2D.offset, boxCollider2D.size, 0);
+        Collider2D[] collider2DArray = Physics2D.OverlapBoxAll(position + (Vector3)boxCollider2D.offset, boxCollider2D.size, 0);//checks
+        //if thers 
 
         bool isAreaClear = collider2DArray.Length == 0;//first we check if actual area is clear or not
         if (!isAreaClear) return false;
 
+        //checks all colliders in the minconstructionradius
         collider2DArray = Physics2D.OverlapCircleAll(position, buildingType.minConstructionRadius);//getting colliders inside the min construction radius
 
         foreach (Collider2D collider in collider2DArray)
@@ -76,7 +77,7 @@ public class BuildingManager : MonoBehaviour
         }
         //not placed too far from anyother build
         float maxConstructionRadius = 25f;
-        collider2DArray = Physics2D.OverlapCircleAll(position, maxConstructionRadius);//getting colliders inside the min construction radius
+        collider2DArray = Physics2D.OverlapCircleAll(position, maxConstructionRadius);//getting colliders inside the maxConstructionRadius radius
 
         foreach (Collider2D collider in collider2DArray)
         {

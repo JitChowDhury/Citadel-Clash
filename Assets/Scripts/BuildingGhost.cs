@@ -7,14 +7,14 @@ public class BuildingGhost : MonoBehaviour
 
     private void Awake()
     {
-        spriteGameObject = transform.Find("sprite").gameObject;
-        Hide();
+        spriteGameObject = transform.Find("sprite").gameObject;//finds the sprite in transform
+        Hide();//hides by default
     }
 
     void Start()
     {
         BuildingManager.Instance.OnActiveBuildingTypeChange += BuildingManager_OnActiveBuildingTypeChange;
-    }
+    } 
 
     private void BuildingManager_OnActiveBuildingTypeChange(object sender, BuildingManager.OnActiveBuildingTypeChangeEventArgs e)
     {
@@ -24,13 +24,13 @@ public class BuildingGhost : MonoBehaviour
         }
         else
         {
-            Show(e.activeBuildingType.sprite);
+            Show(e.activeBuildingType.sprite);//from passed argument
         }
     }
 
     private void Update()
     {
-        transform.position = UtilsClass.GetMousePosition();
+        transform.position = UtilsClass.GetMousePosition();//gets active mouse position
 
     }
 
