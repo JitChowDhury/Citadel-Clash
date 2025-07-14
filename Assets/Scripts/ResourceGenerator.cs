@@ -1,20 +1,11 @@
+using System;
 using UnityEngine;
 //attached to the resource generate buildings
 public class ResourceGenerator : MonoBehaviour
 {
-    private BuildingTypeSO buildingType;
-    private ResourceGeneratorData resourceGeneratorData;
-    private float timer;
-    private float timerMax;
-
-    private void Awake()
+    public static int GetNearByResourceAmount(ResourceGeneratorData resourceGeneratorData, Vector3 position)
     {
-        resourceGeneratorData = GetComponent<BuildingTypeHolder>().buildingType.resourceGeneratorData;
-        timerMax = resourceGeneratorData.timerMax;
-    }
-    void Start()
-    {
-        Collider2D[] collider2dArray = Physics2D.OverlapCircleAll(transform.position, resourceGeneratorData.resourceDetectionRadius);
+        Collider2D[] collider2dArray = Physics2D.OverlapCircleAll(position, resourceGeneratorData.resourceDetectionRadius);
         int nearByResourceAmount = 0;
         foreach (Collider2D collider in collider2dArray)
         {
@@ -31,7 +22,24 @@ public class ResourceGenerator : MonoBehaviour
 
         }
 
-        nearByResourceAmount = Mathf.Clamp(nearByResourceAmount, 0, resourceGeneratorData.maxResourceAmount);//clamps it according to the stats
+        nearByResourceAmount = Mathf.Clamp(nearByResourceAmount, 0, resourceGeneratorData.maxResourceAmount);//clamps it according to the stats 
+        return nearByResourceAmount;
+
+    }
+    private BuildingTypeSO buildingType;
+    private ResourceGeneratorData resourceGeneratorData;
+    private float timer;
+    private float timerMax;
+
+
+    private void Awake()
+    {
+        resourceGeneratorData = GetComponent<BuildingTypeHolder>().buildingType.resourceGeneratorData;
+        timerMax = resourceGeneratorData.timerMax;
+    }
+    void Start()
+    {
+        int nearByResourceAmount = GetNearByResourceAmount(resourceGeneratorData, transform.position);
         if (nearByResourceAmount == 0)
         {
             //no resource nearby
@@ -72,5 +80,21 @@ public class ResourceGenerator : MonoBehaviour
             ResourceManager.Instance.AddResource(resourceGeneratorData.resourceType, 1);
         }
 
+    }
+
+
+    public ResourceGeneratorData GetResourceGeneratorData()
+    {
+        return resourceGeneratorData;
+    }
+
+    public float GetTimerNormalized()
+    {
+        return timer / timerMax;
+    }
+
+    public float GetAmountGeneratedPerSecond()
+    {
+        return 1 / timerMax;
     }
 }
