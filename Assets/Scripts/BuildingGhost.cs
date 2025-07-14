@@ -8,10 +8,11 @@ public class BuildingGhost : MonoBehaviour
 
     private void Awake()
     {
+
         spriteGameObject = transform.Find("sprite").gameObject;//finds the sprite in transform
         resourceNearbyOverlay = transform.Find("pfResourceNearbyOverlay").GetComponent<ResourceNearbyOverlay>();
         Hide(); //hides by default
-        resourceNearbyOverlay.Hide();
+        resourceNearbyOverlay.Hide();//hides resource
     }
 
     void Start()
@@ -30,7 +31,7 @@ public class BuildingGhost : MonoBehaviour
         else
         {
             Show(e.activeBuildingType.sprite);//from passed argument
-            resourceNearbyOverlay.Show(e.activeBuildingType.resourceGeneratorData);
+            resourceNearbyOverlay.Show(e.activeBuildingType.resourceGeneratorData);//pass the data
 
         }
     }

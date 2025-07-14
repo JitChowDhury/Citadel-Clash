@@ -33,7 +33,15 @@ public class BuildingManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())//checks if the pointer is on a UI
         {
             if (activeBuildingType != null && CanSpawnBuilding(activeBuildingType, UtilsClass.GetMousePosition()))
-                Instantiate(activeBuildingType.buildingPrefab, UtilsClass.GetMousePosition(), Quaternion.identity);
+            {
+                if (ResourceManager.Instance.CanAfford(activeBuildingType.constructionResourceCostArray))
+                {
+                    ResourceManager.Instance.SpendResources(activeBuildingType.constructionResourceCostArray);
+                    Instantiate(activeBuildingType.buildingPrefab, UtilsClass.GetMousePosition(), Quaternion.identity);
+                }
+            }
+
+
         }
 
     }
