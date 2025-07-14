@@ -25,12 +25,6 @@ public class ResourceManager : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-
-    }
-
-
 
     public void AddResource(ResourceTypeSO resourceType, int amount)
     {

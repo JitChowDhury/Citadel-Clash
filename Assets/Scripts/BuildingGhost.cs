@@ -10,7 +10,7 @@ public class BuildingGhost : MonoBehaviour
     {
         spriteGameObject = transform.Find("sprite").gameObject;//finds the sprite in transform
         resourceNearbyOverlay = transform.Find("pfResourceNearbyOverlay").GetComponent<ResourceNearbyOverlay>();
-        Hide();//hides by default
+        Hide(); //hides by default
         resourceNearbyOverlay.Hide();
     }
 

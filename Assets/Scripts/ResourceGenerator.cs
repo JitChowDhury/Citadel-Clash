@@ -3,12 +3,14 @@ using UnityEngine;
 //attached to the resource generate buildings
 public class ResourceGenerator : MonoBehaviour
 {
+    //returns the nearbyresourceamount count
     public static int GetNearByResourceAmount(ResourceGeneratorData resourceGeneratorData, Vector3 position)
     {
         Collider2D[] collider2dArray = Physics2D.OverlapCircleAll(position, resourceGeneratorData.resourceDetectionRadius);
         int nearByResourceAmount = 0;
         foreach (Collider2D collider in collider2dArray)
         {
+            //get all the resource node
             ResourceNode resourceNode = collider.GetComponent<ResourceNode>();
             if (resourceNode != null)
             {
@@ -21,7 +23,7 @@ public class ResourceGenerator : MonoBehaviour
 
 
         }
-
+        //clamps to nearest value
         nearByResourceAmount = Mathf.Clamp(nearByResourceAmount, 0, resourceGeneratorData.maxResourceAmount);//clamps it according to the stats 
         return nearByResourceAmount;
 
