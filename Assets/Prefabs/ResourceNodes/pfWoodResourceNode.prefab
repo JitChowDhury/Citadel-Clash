@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runOnce: 1
-  positionOffset: -2.879
+  positionOffset: -2.05
 --- !u!4 &2034703363527185991 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5877761172366299447, guid: e5d4607771922bd41abbbb7a46c8aa8e, type: 3}
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runOnce: 1
-  positionOffset: -4.232
+  positionOffset: -3.3
 --- !u!1 &3548119605475084763 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8976734756563553963, guid: e5d4607771922bd41abbbb7a46c8aa8e, type: 3}
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runOnce: 1
-  positionOffset: -2.794
+  positionOffset: -2.1
 --- !u!1 &5414054618307696454 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 471790222991265846, guid: e5d4607771922bd41abbbb7a46c8aa8e, type: 3}
@@ -258,4 +258,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runOnce: 1
-  positionOffset: -3.7
+  positionOffset: -3.3
