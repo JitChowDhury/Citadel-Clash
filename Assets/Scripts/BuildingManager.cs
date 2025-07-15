@@ -32,12 +32,24 @@ public class BuildingManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())//checks if the pointer is on a UI
         {
-            if (activeBuildingType != null && CanSpawnBuilding(activeBuildingType, UtilsClass.GetMousePosition()))
+            if (activeBuildingType != null)
             {
-                if (ResourceManager.Instance.CanAfford(activeBuildingType.constructionResourceCostArray))
+                if (CanSpawnBuilding(activeBuildingType, UtilsClass.GetMousePosition(), out string errorMessage))
                 {
-                    ResourceManager.Instance.SpendResources(activeBuildingType.constructionResourceCostArray);
-                    Instantiate(activeBuildingType.buildingPrefab, UtilsClass.GetMousePosition(), Quaternion.identity);
+                    if (ResourceManager.Instance.CanAfford(activeBuildingType.constructionResourceCostArray))
+                    {
+                        ResourceManager.Instance.SpendResources(activeBuildingType.constructionResourceCostArray);
+                        Instantiate(activeBuildingType.buildingPrefab, UtilsClass.GetMousePosition(), Quaternion.identity);
+                    }
+                    else
+                    {
+                        ToolTipUI.Instance.Show("Cannot Afford" + activeBuildingType.GetConstructionResourceCostString(), new ToolTipUI.ToolTipTimer { timer = 2f });
+                    }
+
+                }
+                else
+                {
+                    ToolTipUI.Instance.Show(errorMessage, new ToolTipUI.ToolTipTimer { timer = 2f });
                 }
             }
 
@@ -60,14 +72,21 @@ public class BuildingManager : MonoBehaviour
         return activeBuildingType;
     }
 
-    private bool CanSpawnBuilding(BuildingTypeSO buildingType, Vector3 position)
+    private bool CanSpawnBuilding(BuildingTypeSO buildingType, Vector3 position, out string errorMessage)
     {
         BoxCollider2D boxCollider2D = buildingType.buildingPrefab.GetComponent<BoxCollider2D>();
         Collider2D[] collider2DArray = Physics2D.OverlapBoxAll(position + (Vector3)boxCollider2D.offset, boxCollider2D.size, 0);//checks
         //if thers 
 
         bool isAreaClear = collider2DArray.Length == 0;//first we check if actual area is clear or not
-        if (!isAreaClear) return false;
+
+        if (!isAreaClear)
+        {
+
+            errorMessage = "Area is not clear";
+            return false;
+        }
+
 
         //checks all colliders in the minconstructionradius
         collider2DArray = Physics2D.OverlapCircleAll(position, buildingType.minConstructionRadius);//getting colliders inside the min construction radius
@@ -79,7 +98,11 @@ public class BuildingManager : MonoBehaviour
             if (buildingTypeHolder != null)
             {
                 //has a building of same type withing the minconstruction radius
-                if (buildingTypeHolder.buildingType == buildingType) return false;
+                if (buildingTypeHolder.buildingType == buildingType)
+                {
+                    errorMessage = "Too close to another building of same type";
+                    return false;
+                }
             }
 
         }
@@ -93,13 +116,14 @@ public class BuildingManager : MonoBehaviour
             BuildingTypeHolder buildingTypeHolder = collider.GetComponent<BuildingTypeHolder>();
             if (buildingTypeHolder != null)
             {
-                //its a building 
+                //its a building
+                errorMessage = "";
                 return true;
 
             }
 
         }
-
+        errorMessage = "Too far from any other building!";
         return false;
     }
 }

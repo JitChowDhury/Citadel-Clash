@@ -11,6 +11,7 @@ public class ToolTipUI : MonoBehaviour
     private TextMeshProUGUI textMeshPro;
     private RectTransform backgroundRectTransform;
     private RectTransform rectTransform;
+    private ToolTipTimer toolTipTimer;
 
     void Awake()
     {
@@ -24,21 +25,19 @@ public class ToolTipUI : MonoBehaviour
 
     private void Update()
     {
-        Vector2 anchoredPosition = Input.mousePosition / canvasRectTranform.localScale.x;
+        HandleFollowMouse();
 
 
-        if (anchoredPosition.x + backgroundRectTransform.rect.width > canvasRectTranform.rect.width)
+
+        if (toolTipTimer != null)
         {
-            anchoredPosition.x = canvasRectTranform.rect.width - backgroundRectTransform.rect.width;
+            toolTipTimer.timer -= Time.deltaTime;
+            if (toolTipTimer.timer <= 0)
+            {
+                Hide();
+            }
+
         }
-
-
-        if (anchoredPosition.y + backgroundRectTransform.rect.height > canvasRectTranform.rect.height)
-        {
-            anchoredPosition.y = canvasRectTranform.rect.height - backgroundRectTransform.rect.height;
-        }
-
-        rectTransform.anchoredPosition = anchoredPosition;
     }
 
     private void SetText(string toolTipText)
@@ -50,14 +49,58 @@ public class ToolTipUI : MonoBehaviour
         backgroundRectTransform.sizeDelta = textSize + padding;
     }
 
-    public void Show(string toolTipText)
+    public void Show(string toolTipText, ToolTipTimer toolTipTimer = null)
     {
+        this.toolTipTimer = toolTipTimer;
         gameObject.SetActive(true);
         SetText(toolTipText);
+        HandleFollowMouse();
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    public void HandleFollowMouse()
+    {
+        Vector2 anchoredPosition = Input.mousePosition / canvasRectTranform.localScale.x;
+
+        float elementWidth = backgroundRectTransform.rect.width;
+        float elementHeight = backgroundRectTransform.rect.height;
+        float canvasWidth = canvasRectTranform.rect.width;
+        float canvasHeight = canvasRectTranform.rect.height;
+
+        // Clamp right
+        if (anchoredPosition.x + elementWidth > canvasWidth)
+        {
+            anchoredPosition.x = canvasWidth - elementWidth;
+        }
+
+        // Clamp left
+        if (anchoredPosition.x < 0)
+        {
+            anchoredPosition.x = 0;
+        }
+
+        // Clamp top
+        if (anchoredPosition.y + elementHeight > canvasHeight)
+        {
+            anchoredPosition.y = canvasHeight - elementHeight;
+        }
+
+        // Clamp bottom
+        if (anchoredPosition.y < 0)
+        {
+            anchoredPosition.y = 0;
+        }
+
+        rectTransform.anchoredPosition = anchoredPosition;
+    }
+
+
+    public class ToolTipTimer
+    {
+        public float timer;
     }
 }
