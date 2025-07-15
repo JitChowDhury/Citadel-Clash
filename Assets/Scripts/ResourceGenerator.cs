@@ -70,7 +70,7 @@ public class ResourceGenerator : MonoBehaviour
             //      - Slower when fewer resources are nearby
 
         }
-        Debug.Log("nearByResourceAmount: " + nearByResourceAmount + ";" + "timermax: " + timerMax);
+
     }
     private void Update()
     {
