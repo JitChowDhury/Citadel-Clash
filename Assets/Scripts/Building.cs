@@ -17,14 +17,13 @@ public class Building : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            healthSystem.Damage(30);
-        }
+
     }
 
     private void healthSystem_OnDied(object sender, EventArgs e)
     {
         Destroy(gameObject);
     }
+
+
 }

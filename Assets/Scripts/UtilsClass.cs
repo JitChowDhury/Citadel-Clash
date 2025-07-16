@@ -10,4 +10,9 @@ public static class UtilsClass
         mousePosition.z = 0f;
         return mousePosition;
     }
+
+    public static Vector3 GetRandomDir()
+    {
+        return new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+    }
 }
