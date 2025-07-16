@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1472970364380235985}
   - component: {fileID: -2527451256579227158}
   - component: {fileID: 6894912649556663329}
+  - component: {fileID: -3730664059520220052}
+  - component: {fileID: -7803020265926725117}
   - component: {fileID: 1909469215451588973}
   m_Layer: 0
   m_Name: pfHQ
@@ -61,6 +63,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingType: {fileID: 11400000, guid: a72a57d02c9a19b4cb5b53716acdd005, type: 2}
+--- !u!114 &-3730664059520220052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799131801111973608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 079d36755673dff43b1ebbe58862c4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthAmountMax: 100
+--- !u!114 &-7803020265926725117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799131801111973608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f0c11239c0920744a7ffd1c271bfe00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &1909469215451588973
 BoxCollider2D:
   m_ObjectHideFlags: 0
