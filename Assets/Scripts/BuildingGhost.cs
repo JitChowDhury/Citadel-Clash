@@ -31,7 +31,10 @@ public class BuildingGhost : MonoBehaviour
         else
         {
             Show(e.activeBuildingType.sprite);//from passed argument
-            resourceNearbyOverlay.Show(e.activeBuildingType.resourceGeneratorData);//pass the data
+            if (e.activeBuildingType.hasResourceGeneratorData)
+                resourceNearbyOverlay.Show(e.activeBuildingType.resourceGeneratorData);//pass the data
+            else
+                resourceNearbyOverlay.Hide();
 
         }
     }
