@@ -17839,6 +17839,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835e8d50b1511fd4c9b75dc5fdb75e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingResourceAmountList:
+  - resourceType: {fileID: 11400000, guid: da78eaaa3e8b11642b629fda23346103, type: 2}
+    amount: 100
+  - resourceType: {fileID: 11400000, guid: f90084737d7e74145bf5a09f4345755b, type: 2}
+    amount: 100
+  - resourceType: {fileID: 11400000, guid: 2cbadc9b955df8c44a1e49bd461d0167, type: 2}
+    amount: 100
 --- !u!1001 &1997029525
 PrefabInstance:
   m_ObjectHideFlags: 0
