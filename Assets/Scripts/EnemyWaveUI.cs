@@ -5,16 +5,20 @@ using UnityEngine;
 public class EnemyWaveUI : MonoBehaviour
 {
     [SerializeField] EnemyWaveManager enemyWaveManager;
-
+    private Camera mainCamera;
     private TextMeshProUGUI waveNumberText;
     private TextMeshProUGUI waveMessageText;
+
+    private RectTransform enemyWaveSpawnPosIndicator;
     private void Awake()
     {
         waveNumberText = transform.Find("waveNumberText").GetComponent<TextMeshProUGUI>();
         waveMessageText = transform.Find("waveMessageText").GetComponent<TextMeshProUGUI>();
+        enemyWaveSpawnPosIndicator = transform.Find("enemyWaveSpawnPosIndicator").GetComponent<RectTransform>();
     }
     void Start()
     {
+        mainCamera = Camera.main;
         enemyWaveManager.OnWaveNumberChanged += EnemyWaveManager_OnWaveNumberChanged;
         SetWaveNumberText("Wave: " + enemyWaveManager.GetWaveNumber());
     }
@@ -35,6 +39,10 @@ public class EnemyWaveUI : MonoBehaviour
         {
             SetMessageText("Next Wave in " + nextWaveSpawnTimer.ToString("F1") + "s");
         }
+
+        Vector3 dirToSpawnPosition = (enemyWaveManager.GetSpawnPosition() - mainCamera.transform.position).normalized;
+        enemyWaveSpawnPosIndicator.anchoredPosition = dirToSpawnPosition * 300f;
+        enemyWaveSpawnPosIndicator.eulerAngles = new Vector3(0, 0, UtilsClass.GetAngleFromVector(dirToSpawnPosition));
 
     }
 

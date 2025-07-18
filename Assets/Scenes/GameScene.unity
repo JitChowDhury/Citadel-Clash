@@ -5277,8 +5277,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Next Wave in XXs
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3069381ae73a1794cbee604d8a2e4273, type: 2}
-  m_sharedMaterial: {fileID: 2574153968653627428, guid: 3069381ae73a1794cbee604d8a2e4273, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 108125a358427c648904c7b6f1492171, type: 2}
+  m_sharedMaterial: {fileID: 8215665194293285780, guid: 108125a358427c648904c7b6f1492171, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5308,11 +5308,11 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 3.09
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -8130,6 +8130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9819e09c596d6ac4797074137e9bc7fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyWaveManager: {fileID: 2112179771}
 --- !u!1001 &824436594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17098,8 +17099,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3069381ae73a1794cbee604d8a2e4273, type: 2}
-  m_sharedMaterial: {fileID: 2574153968653627428, guid: 3069381ae73a1794cbee604d8a2e4273, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 108125a358427c648904c7b6f1492171, type: 2}
+  m_sharedMaterial: {fileID: 8215665194293285780, guid: 108125a358427c648904c7b6f1492171, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17129,11 +17130,11 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 3.09
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
