@@ -1,9 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyWaveManager : MonoBehaviour
 {
-
+    public event EventHandler OnWaveNumberChanged;
     private enum State
     {
         WaitingToSpawnNextWave,
@@ -21,11 +22,10 @@ public class EnemyWaveManager : MonoBehaviour
     void Start()
     {
         state = State.WaitingToSpawnNextWave;
-        spawnPos = spawnPositionTranformList[Random.Range(0, spawnPositionTranformList.Count)].position;
+        spawnPos = spawnPositionTranformList[UnityEngine.Random.Range(0, spawnPositionTranformList.Count)].position;
         nextWaveSpawnPosition.position = spawnPos;
         nextWaveSpawnTimer = 3f;
     }
-
     void Update()
     {
         switch (state)
@@ -45,14 +45,14 @@ public class EnemyWaveManager : MonoBehaviour
                     nextEnemySpawnTimer -= Time.deltaTime;
                     if (nextEnemySpawnTimer < 0f)
                     {
-                        nextEnemySpawnTimer = Random.Range(0f, .2f);
-                        Enemy.Create(spawnPos + UtilsClass.GetRandomDir() * Random.Range(0f, 10f));
+                        nextEnemySpawnTimer = UnityEngine.Random.Range(0f, .2f);
+                        Enemy.Create(spawnPos + UtilsClass.GetRandomDir() * UnityEngine.Random.Range(0f, 10f));
                         remainingEnemySpawnAmount--;
 
                         if (remainingEnemySpawnAmount <= 0)
                         {
                             state = State.WaitingToSpawnNextWave;
-                            spawnPos = spawnPositionTranformList[Random.Range(0, spawnPositionTranformList.Count)].position;
+                            spawnPos = spawnPositionTranformList[UnityEngine.Random.Range(0, spawnPositionTranformList.Count)].position;
                             nextWaveSpawnPosition.position = spawnPos;
                         }
 
@@ -73,7 +73,18 @@ public class EnemyWaveManager : MonoBehaviour
         remainingEnemySpawnAmount = 5 + 3 * waveNumber;
         state = State.SpawningWave;
         waveNumber++;
+        OnWaveNumberChanged?.Invoke(this, EventArgs.Empty);
 
+    }
+
+    public int GetWaveNumber()
+    {
+        return waveNumber;
+    }
+
+    public float GetNextWaveSpawnTimer()
+    {
+        return nextWaveSpawnTimer;
     }
 
 }
