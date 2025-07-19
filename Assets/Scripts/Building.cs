@@ -6,6 +6,14 @@ public class Building : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private HealthSystem healthSystem;
     private BuildingTypeSO buildingType;
+    private Transform buildingDemolishBtn;
+
+    void Awake()
+    {
+        buildingDemolishBtn = transform.Find("pfBuildingDemolishBtn");
+        if (buildingDemolishBtn != null)
+            buildingDemolishBtn.gameObject.SetActive(false);
+    }
     void Start()
     {
         buildingType = GetComponent<BuildingTypeHolder>().buildingType;
@@ -23,6 +31,19 @@ public class Building : MonoBehaviour
     private void healthSystem_OnDied(object sender, EventArgs e)
     {
         Destroy(gameObject);
+    }
+
+    private void OnMouseEnter()
+    {
+        if (buildingDemolishBtn != null)
+            buildingDemolishBtn.gameObject.SetActive(true);
+    }
+
+    private void OnMouseExit()
+    {
+        if (buildingDemolishBtn != null)
+            buildingDemolishBtn.gameObject.SetActive(false);
+
     }
 
 
