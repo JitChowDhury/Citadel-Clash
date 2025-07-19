@@ -26,7 +26,14 @@ public class BuildingManager : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        HQBuilding.GetComponent<HealthSystem>().OnDied += HQ_OnDied;
         buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);//loads from resource folder
+
+    }
+
+    private void HQ_OnDied(object sender, EventArgs e)
+    {
+        GameOverUI.Instance.Show();
 
     }
 
