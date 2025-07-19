@@ -16,6 +16,14 @@ public class TowerHealthBar : MonoBehaviour
     void Start()
     {
         healthSystem.OnDamaged += healthSystem_OnDamaged;
+        healthSystem.OnHealed += healthSystem_OnHealed;
+
+        UpdateBar();
+        UpdateHealthBarVisible();
+    }
+
+    private void healthSystem_OnHealed(object sender, EventArgs e)
+    {
         UpdateBar();
         UpdateHealthBarVisible();
     }
