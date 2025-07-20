@@ -35,13 +35,20 @@ public class Enemy : MonoBehaviour
         healthSystem = GetComponent<HealthSystem>();
         lookForTargetTimer = Random.Range(0f, lookForTargetTimerMax);
         healthSystem.OnDied += HealthSystem_OnDied;
+        healthSystem.OnDamaged += HealthSystem_OnDamaged;
 
 
+    }
+
+    private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
+    {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyHit);
     }
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
         Destroy(gameObject);
+        SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyDie);
     }
 
     // Update is called once per frame

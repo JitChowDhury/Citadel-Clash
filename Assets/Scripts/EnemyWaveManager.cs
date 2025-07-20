@@ -42,6 +42,7 @@ public class EnemyWaveManager : MonoBehaviour
                 if (nextWaveSpawnTimer < 0f)
                 {
 
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyWaveStarting);
                     SpawnWave();
                 }
                 break;
