@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e189f4741fd2dbb49883c876e5ef9109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootTimerMax: 0.3
+  shootTimerMax: 0.2
 --- !u!1001 &2721727486306860509
 PrefabInstance:
   m_ObjectHideFlags: 0
