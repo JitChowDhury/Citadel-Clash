@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
     {
         SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyHit);
+        CinemachineShake.Instance.ShakeCamera(4f, .1f);
     }
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
