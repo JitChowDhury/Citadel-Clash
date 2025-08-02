@@ -42,20 +42,18 @@ public class Building : MonoBehaviour
         ShowBuildingRepairButton();
         SoundManager.Instance.PlaySound(SoundManager.Sound.BuildingDamaged);
         CinemachineShake.Instance.ShakeCamera(7f, .15f);
+        ChromaticAberrationEffect.Instance.SetWeight(1f);
     }
 
-    void Update()
-    {
-
-    }
 
     private void healthSystem_OnDied(object sender, EventArgs e)
     {
         Instantiate(Resources.Load<Transform>("pfBuildingDestroyedParticles"), transform.position, Quaternion.identity);
-
-        Destroy(gameObject);
         CinemachineShake.Instance.ShakeCamera(10f, .2f);
         SoundManager.Instance.PlaySound(SoundManager.Sound.BuildingDestroyed);
+        ChromaticAberrationEffect.Instance.SetWeight(1f);
+        Destroy(gameObject);
+
     }
 
     private void OnMouseEnter()
