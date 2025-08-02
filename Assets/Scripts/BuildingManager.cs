@@ -118,6 +118,19 @@ public class BuildingManager : MonoBehaviour
             }
 
         }
+
+        if (buildingType.hasResourceGeneratorData)
+        {
+            ResourceGeneratorData resourceGeneratorData = buildingType.resourceGeneratorData;
+            int nearByResourceAmount = ResourceGenerator.GetNearByResourceAmount(resourceGeneratorData, position);
+
+            if (nearByResourceAmount == 0)
+            {
+                errorMessage = "There are no nearby resources";
+                return false;
+            }
+        }
+
         //not placed too far from anyother build
         float maxConstructionRadius = 25f;
         collider2DArray = Physics2D.OverlapCircleAll(position, maxConstructionRadius);//getting colliders inside the maxConstructionRadius radius
